@@ -1,0 +1,128 @@
+.form__list {
+  max-width: 800px;
+  padding: 0;
+  margin: 0 auto;
+  list-style-type: none;
+}
+
+.form__item {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  align-items: normal;
+}
+
+.form__item-label {
+  flex: 1 0 120px;
+  max-width: 220px;
+  padding: 8px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px #333;
+  font-weight: 400;
+}
+
+.form__item-field {
+  flex: 1 0 220px;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+}
+
+.form__item-field-input {
+  outline: none;
+  padding: 15px 10px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.form__item-field-error {
+  font-size: 0.9em;
+  color: #ec7081;
+}
+
+.form__select {
+  min-width: 256px;
+  height: 50px;
+  background-color: #fff;
+  padding: 0 10px;
+  border: none;
+  cursor: pointer;
+  /*  line-height: 50px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; */
+}
+
+/* #type-message option {
+  padding: 0 15px;
+} */
+
+.form__upload-field {
+  margin: 0 -10px;
+}
+
+.form__upload-field::-webkit-file-upload-button {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+}
+
+.upload-field--blue::-webkit-file-upload-button {
+  background: #00a8ff;
+  color: #f2f2f2;
+  text-shadow: 1px 1px #444;
+}
+
+.upload-field--blue::-webkit-file-upload-button:hover,
+.upload-field--blue::-webkit-file-upload-button:focus {
+  background: #1eb1fc;
+}
+
+.form__upload-field::-webkit-file-upload-button:active {
+  box-shadow: 2px 2px 1px #333;
+}
+
+.upload-field--blue::-webkit-file-upload-button:active {
+  background: #1eb1fc;
+}
+
+.btn {
+  margin: auto;
+  padding: 15px 25px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px #333;
+  letter-spacing: 0.09em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:disabled {
+  background-color: #97c7e0;
+  color: #555;
+  text-shadow: 1px 1px #ddd;
+  cursor: not-allowed;
+}
+
+.btn:active {
+  box-shadow: 2px 2px 1px #333;
+}
+
+.btn--blue {
+  background: #00a8ff;
+  color: #f2f2f2;
+}
+
+.btn--blue:hover:enabled,
+.btn--blue:focus {
+  background: #1eb1fc;
+}
+
+.btn--blue:active {
+  background: #1eb1fc;
+}

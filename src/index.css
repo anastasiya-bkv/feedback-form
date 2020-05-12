@@ -1,0 +1,15 @@
+body {
+  font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
+  /*background: #3aafab;*/
+  /* background: linear-gradient(90deg, #4156b2 0%, #6c44a0 100%);*/
+  /*background: linear-gradient(90deg, #f0a2a2 0%, #ddd6f3 100%); 
+  #ee9ca7 → #ffdde1 #ffafbd → #ffc3a0*/
+  /*   background: linear-gradient(90deg, #06beb6, #48b1bf);
+ */
+  background: linear-gradient(90deg, #5041b2 0%, #7969e6 100%);
+  color: #fff;
+  padding: 25px 0;
+  text-align: center;
+  height: 100vh;
+  color: #fff;
+}

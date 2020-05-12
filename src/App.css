@@ -1,0 +1,14 @@
+.header {
+  text-transform: uppercase;
+  font-size: 28px;
+  font-weight: 600;
+  text-shadow: 1px 1px 5px #333;
+  margin: 20px 0;
+}
+
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
