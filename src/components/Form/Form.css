@@ -28,6 +28,8 @@
   flex: 1 0 220px;
   display: flex;
   flex-wrap: wrap;
+
+  overflow: hidden;
   /* justify-content: center; */
 }
 
@@ -45,10 +47,8 @@
 }
 
 .form__select {
-  /* min-width: 256px; */
   height: 50px;
   background-color: #fff;
-  /* padding: 0 10px; */
   padding: 0 40px 0 10px;
   border: none;
   cursor: pointer;
@@ -60,11 +60,6 @@
   -webkit-appearance: none; /* Chrome */
   -moz-appearance: none; /* Firefox */
   appearance: none; /* убираем дефолнтные стрелочки */
-
-  /*  line-height: 50px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; */
 }
 
 .select-icon {
@@ -147,7 +142,7 @@
 }
 
 .name-file {
-  flex-grow: 1;
+  flex: 1 0 150px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -160,10 +155,11 @@
 
 .btn-upload {
   height: 100%;
-  min-width: 50px;
   color: #fff;
   background-color: #3e51d3;
   padding: 0 10px;
+  max-width: 170px;
+  flex: 1 0 150px;
 }
 
 .input-svg {
@@ -176,5 +172,13 @@
 @media screen and (max-width: 730px) {
   .btn-text {
     display: none;
+  }
+  .btn-upload {
+    flex: 1 0 50px;
+    padding: 0;
+    max-width: 60px;
+  }
+  .input-svg {
+    margin-right: 0;
   }
 }

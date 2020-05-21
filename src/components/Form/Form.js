@@ -540,7 +540,7 @@ class Form extends Component {
                 type={image.type}
                 id="image"
                 className="input-file"
-                accept={image.accept}
+                accept={image.validation.accept}
                 onChange={(event) => {
                   this.changeAndValidateChangeHandler(event, "image");
                 }}
