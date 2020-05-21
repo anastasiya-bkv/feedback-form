@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import "./Form.css";
+import { ReactComponent as InputSvg } from "./input.svg";
+
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function validateEmail(email) {
   const reg = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/;
@@ -89,7 +93,7 @@ class Form extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    const formControls = this.state.formControls;
+    const { formControls } = this.state;
     let formData = {};
     Object.keys(formControls).forEach((control) => {
       const value = formControls[control].value;
@@ -108,13 +112,13 @@ class Form extends Component {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-    }).then((response) => {
-      response.json().then((data) => {
+    })
+      .then((response) => response.json())
+      .then((data) => {
         console.group("Response:");
         console.log(data);
         console.groupEnd();
       });
-    });
   };
 
   validateControl(value, validation) {
@@ -122,12 +126,12 @@ class Form extends Component {
       return true;
     } else {
       let isValid = true;
-      if (!!validation.required) {
+      if (validation.required) {
         if (value === null) {
           isValid = false;
         } else {
           if (typeof value === "string") {
-            isValid = value.trim() !== "" && isValid;
+            isValid = value.trim() !== "";
           }
         }
       }
@@ -171,16 +175,16 @@ class Form extends Component {
     };
     let control = {
       ...formControls[controlName],
+      touched: true,
     };
-    control.touched = true;
     control.valid = this.validateControl(control.value, control.validation);
     formControls[controlName] = control;
-    let isFormValid = true;
+    /* let isFormValid = true; */
     /*Object.keys(formControls).forEach((name) => {
       isFormValid = formControls[name].valid & isFormValid;
     }); */
-    isFormValid = Object.keys(formControls).every(
-      (name) => formControls[name].valid & isFormValid
+    let isFormValid = Object.keys(formControls).every(
+      (name) => formControls[name].valid
     );
     /* console.group("isFormValid");
     console.log("isFormValid:", isFormValid);
@@ -312,21 +316,22 @@ class Form extends Component {
     };
     let control = {
       ...formControls[controlName],
+      touched: true,
     };
     if (event.target.type === "file") {
       control = this.fileHandler(event, control);
+      console.log("image.value : ", control.value);
     } else {
       control.value = event.target.value;
     }
-    control.touched = true;
     control.valid = this.validateControl(control.value, control.validation);
     formControls[controlName] = control;
-    let isFormValid = true;
+    /* let isFormValid = true; */
     /*Object.keys(formControls).forEach((name) => {
       isFormValid = formControls[name].valid & isFormValid;
     }); */
-    isFormValid = Object.keys(formControls).every(
-      (name) => formControls[name].valid & isFormValid
+    let isFormValid = Object.keys(formControls).every(
+      (name) => formControls[name].valid
     );
 
     /* console.group("isFormValid");
@@ -387,8 +392,8 @@ class Form extends Component {
         <ul className="form__list">
           <li className="form__item">
             <label htmlFor="first-name" className="form__item-label">
-              Имя{" "}
-            </label>{" "}
+              Имя
+            </label>
             <div className="form__item-field">
               <input
                 type="text"
@@ -402,21 +407,20 @@ class Form extends Component {
                 onChange={(event) => {
                   this.changeHandler(event, "firstName");
                 }}
-              ></input>{" "}
-              {!!firstName.validation &&
+              ></input>
+              {firstName.validation &&
                 firstName.touched &&
                 !firstName.valid && (
                   <div className="form__item-field-error">
-                    {" "}
-                    {firstName.errorMessage}{" "}
+                    {firstName.errorMessage}
                   </div>
-                )}{" "}
-            </div>{" "}
-          </li>{" "}
+                )}
+            </div>
+          </li>
           <li className="form__item">
             <label htmlFor="last-name" className="form__item-label">
-              Фамилия{" "}
-            </label>{" "}
+              Фамилия
+            </label>
             <div className="form__item-field">
               <input
                 type="text"
@@ -430,19 +434,18 @@ class Form extends Component {
                 onChange={(event) => {
                   this.changeHandler(event, "lastName");
                 }}
-              ></input>{" "}
-              {!!lastName.validation && lastName.touched && !lastName.valid && (
+              ></input>
+              {lastName.validation && lastName.touched && !lastName.valid && (
                 <div className="form__item-field-error">
-                  {" "}
-                  {lastName.errorMessage}{" "}
+                  {lastName.errorMessage}
                 </div>
-              )}{" "}
-            </div>{" "}
-          </li>{" "}
+              )}
+            </div>
+          </li>
           <li className="form__item">
             <label htmlFor="email" className="form__item-label">
-              Email{" "}
-            </label>{" "}
+              Email
+            </label>
             <div className="form__item-field">
               <input
                 type="email"
@@ -456,20 +459,19 @@ class Form extends Component {
                 onChange={(event) => {
                   this.changeHandler(event, "email");
                 }}
-              ></input>{" "}
-              {!!email.validation && email.touched && !email.valid && (
+              ></input>
+              {email.validation && email.touched && !email.valid && (
                 <div className="form__item-field-error">
-                  {" "}
-                  {email.errorMessage}{" "}
+                  {email.errorMessage}
                 </div>
-              )}{" "}
-            </div>{" "}
-          </li>{" "}
+              )}
+            </div>
+          </li>
           <li className="form__item">
             <label htmlFor="type-message" className="form__item-label">
-              Категория сообщения{" "}
-            </label>{" "}
-            <div className="form__item-field">
+              Категория сообщения
+            </label>
+            <div className="form__item-field icon">
               <select
                 id="type-message"
                 className="form__item-field-input form__select"
@@ -480,26 +482,31 @@ class Form extends Component {
                 /* options={this.state.typeMessageOptions} */
               >
                 <option value="" disabled>
-                  Выберите категорию сообщения{" "}
-                </option>{" "}
-                <option value="suggestion"> Предложение </option>{" "}
-                <option value="appeal"> Обращение </option>{" "}
-                <option value="review"> Отзыв </option>{" "}
-              </select>{" "}
-              {!!typeMessage.validation &&
+                  Выберите категорию сообщения
+                </option>
+                <option value="suggestion"> Предложение </option>
+                <option value="appeal"> Обращение </option>
+                <option value="review"> Отзыв </option>
+              </select>
+
+              {typeMessage.validation &&
                 typeMessage.touched &&
                 !typeMessage.valid && (
                   <div className="form__item-field-error">
-                    {" "}
-                    {typeMessage.errorMessage}{" "}
+                    {typeMessage.errorMessage}
                   </div>
-                )}{" "}
-            </div>{" "}
-          </li>{" "}
+                )}
+            </div>
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              style={{ color: "#000" }}
+              className="select-icon"
+            />
+          </li>
           <li className="form__item">
             <label htmlFor="message" className="form__item-label">
-              Сообщение{" "}
-            </label>{" "}
+              Сообщение
+            </label>
             <div className="form__item-field">
               <textarea
                 rows="5"
@@ -516,48 +523,63 @@ class Form extends Component {
                 onChange={(event) => {
                   this.changeHandler(event, "message");
                 }}
-              ></textarea>{" "}
-              {!!message.validation && message.touched && !message.valid && (
+              ></textarea>
+              {message.validation && message.touched && !message.valid && (
                 <div className="form__item-field-error">
-                  {" "}
-                  {message.errorMessage}{" "}
+                  {message.errorMessage}
                 </div>
-              )}{" "}
-            </div>{" "}
-          </li>{" "}
+              )}
+            </div>
+          </li>
           <li className="form__item">
             <label htmlFor="image" className="form__item-label">
-              {" "}
-              {image.label}{" "}
-            </label>{" "}
+              {image.label}
+            </label>
             <div className="form__item-field">
               <input
                 type={image.type}
-                className="form__item-field-input form__upload-field upload-field--blue"
-                accept={image.accept}
                 id="image"
+                className="input-file"
+                accept={image.accept}
                 onChange={(event) => {
                   this.changeAndValidateChangeHandler(event, "image");
                 }}
-              />{" "}
-              {!!image.validation && image.touched && !image.valid && (
+              />
+              <label htmlFor="image" className="input-label">
+                <span className="name-file">
+                  {image.value ? image.value.name : "Файл не выбран"}
+                </span>
+                <span className="btn-upload  btn--blue">
+                  <InputSvg className="input-svg" />
+                  <span className="btn-text">Выберите файл</span>
+                </span>
+              </label>
+
+              {image.validation && image.touched && !image.valid && (
                 <div className="form__item-field-error">
-                  {" "}
-                  {image.errorMessage}{" "}
+                  {image.errorMessage}
                 </div>
-              )}{" "}
-            </div>{" "}
-          </li>{" "}
+              )}
+            </div>
+          </li>
+
+          {/*  <li className="form__item">
+            <input type="file" name="file" id="file" className="inputfile" />
+            <label htmlFor="file" className="btn btn--blue">
+              Выберите файл
+            </label>
+          </li> */}
+
           <li className="form__item">
             <button
               type="submit"
               className="btn btn--blue"
               disabled={!this.state.isFormValid}
             >
-              Отправить{" "}
-            </button>{" "}
-          </li>{" "}
-        </ul>{" "}
+              Отправить
+            </button>
+          </li>
+        </ul>
       </form>
     );
   }
